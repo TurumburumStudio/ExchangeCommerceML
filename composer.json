@@ -1,0 +1,10 @@
+{
+    "name": "makii/parser-commerce-ml",
+    "authors": [
+        {
+            "name": "Kremenchuk Igor",
+            "email": "makiintoch@gmail.com"
+        }
+    ],
+    "require": {}
+}
