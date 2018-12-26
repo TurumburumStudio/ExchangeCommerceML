@@ -12,7 +12,8 @@
         "ext-SimpleXML": "*"
     },
     "require-dev": {
-        "phpunit/phpunit": "^7.5"
+        "phpunit/phpunit": "^7.5",
+        "symfony/var-dumper": "^4.2"
     },
     "autoload": {
         "psr-4": {
