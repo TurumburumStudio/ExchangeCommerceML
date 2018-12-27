@@ -7,7 +7,7 @@ use App\Parser\{ParseProducts, ParseGroups};
 
 class ParserTest extends \PHPUnit\Framework\TestCase 
 {
-    public function testCategoriesCount()
+    public function testCategoriesCount(): void
     {
         $parser = new ParseGroups();
         $xml = $this->loadXml('./storage/import.xml');
@@ -15,7 +15,7 @@ class ParserTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(33, count($groups));
     }
 
-    public function testProductsCount()
+    public function testProductsCount(): void
     {
         $parser = new ParseProducts();
         $xml = $this->loadXml('./storage/products.xml');

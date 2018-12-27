@@ -17,7 +17,7 @@ class ParseProducts extends Parser implements ParserInterface
                 'groups' => $this->getGroups($item['Группы']),
                 'country' => $item['Страна'],
                 'weight' => $item['Вес'],
-                'is_active' => $item['ПометкаУдаления']
+                'inactive' => $item['ПометкаУдаления']
             ];
 
             //$result[] = $item;
