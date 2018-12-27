@@ -1,9 +1,20 @@
 <?php
 
-namespace App;
+namespace App\Loader;
 
-class Parser
+use Symfony\Component\Finder\Finder;
+
+class Loader
 {
+    public function __construct()
+    {
+    }
+
+    public function extractArray(string $path)
+    {
+
+    }
+
     public function load(string $xml)
     {
         if (is_file($xml)) {
