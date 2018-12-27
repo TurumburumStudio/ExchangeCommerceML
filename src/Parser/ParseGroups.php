@@ -12,7 +12,11 @@ class ParseGroups extends Parser implements ParserInterface
     {
         $items = $this->XmlToArray($xml);
 
-        return $this->arrayFormatter($this->arrayFlatten($this->getGroups($items['Классификатор']['Группы']['Группа'])), 3);
+        $groups = $this->getGroups($items['Классификатор']['Группы']['Группа']);
+
+        return array_map(function ($item) {
+            return ['id' => $item[0], 'name' => $item[1], 'parent' => $item[2]];
+        }, $this->arrayFormatter($this->arrayFlatten($groups), 3));
     }
 
     private function getGroups(array $items, string $parent = null): array

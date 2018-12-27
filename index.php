@@ -3,15 +3,20 @@
 require_once('./vendor/autoload.php');
 
 use App\Loader\Loader;
-use App\Parser\ParseGroups;
+use App\Parser\{ParseGroups, ParseProducts};
 
-$url = './storage/import.xml';
+$products_url = './storage/products.xml';
+$groups_url = './storage/import.xml';
 
 $loader = new Loader();
-$parser = new ParseGroups();
+$productParser = new ParseProducts();
+$groupParser = new ParseGroups();
 
-$xml = $loader->load($url);
 
-$groups = $parser->getItems($xml);
+$product_xml = $loader->load($products_url);
+$group_xml = $loader->load($groups_url);
 
-dd(count($groups));
+$products = $productParser->getItems($product_xml);
+$groups = $groupParser->getItems($group_xml);
+
+dd($products);
