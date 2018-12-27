@@ -2,10 +2,20 @@
 
 namespace App\Tests;
 
+use App\Loader\Loader;
+use App\Parser\ParseGroups;
+
 class ParserTest extends \PHPUnit\Framework\TestCase 
 {
-    public function testBasicTest()
+    public function testCategoryCount()
     {
-        $this->assertTrue(true);
+        $loader = new Loader();
+        $parser = new ParseGroups();
+        
+        $xml = $loader->load('./storage/import.xml');
+        
+        $groups = $parser->getItems($xml);
+
+        $this->assertEquals(33, count($groups));
     }
 }

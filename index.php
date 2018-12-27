@@ -2,11 +2,16 @@
 
 require_once('./vendor/autoload.php');
 
-use App\FinderCommerceML;
-use Symfony\Component\Finder\Finder;
+use App\Loader\Loader;
+use App\Parser\ParseGroups;
 
-$config = require_once('./config/app.php');
+$url = './storage/import.xml';
 
-$finder = new FinderCommerceML(new Finder());
+$loader = new Loader();
+$parser = new ParseGroups();
 
-//$finder = new FinderCommerceML($config);
+$xml = $loader->load($url);
+
+$groups = $parser->getItems($xml);
+
+dd(count($groups));
