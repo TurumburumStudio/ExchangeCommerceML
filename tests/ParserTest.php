@@ -3,7 +3,7 @@
 namespace App\Tests;
 
 use App\Loader\Loader;
-use App\Parser\{ParseProducts, ParseGroups, ParseWarehouses};
+use App\Parser\{ParseProducts, ParseGroups, ParseWarehouses, ParseRests};
 
 class ParserTest extends \PHPUnit\Framework\TestCase 
 {
@@ -31,9 +31,17 @@ class ParserTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(14, count($warehouses));
     }
 
-    private function loadXml(string $xml)
+    public function testRestsCount(): void
+    {
+        $parser = new ParseRests();
+        $xml = $this->loadXml('./storage/xml/rests.xml');
+        $rests = $parser->getItems($xml);
+        $this->assertEquals(12, count($rests));
+    }
+
+    private function loadXml(string $xml): \SimpleXMLElement
     {
         $loader = new Loader();
         return $loader->load($xml);
     }
-}
+} 

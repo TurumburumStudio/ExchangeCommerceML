@@ -19,8 +19,6 @@ class ParseProducts extends Parser implements ParserInterface
                 'weight' => $item['Вес'],
                 'inactive' => $item['ПометкаУдаления']
             ];
-
-            //$result[] = $item;
         }
 
         return $result;
