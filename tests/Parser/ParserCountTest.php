@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Tests;
+namespace App\Tests\Parser;
 
 use App\Loader\Loader;
-use App\Parser\{ParseProducts, ParseGroups, ParseWarehouses, ParseRests};
+use App\Parser\{ParseProducts, ParseGroups, ParseWarehouses, ParseRests, ParsePrices};
 
-class ParserTest extends \PHPUnit\Framework\TestCase 
+class ParserCountTest extends \PHPUnit\Framework\TestCase 
 {
     public function testCategoriesCount(): void
     {
@@ -37,6 +37,22 @@ class ParserTest extends \PHPUnit\Framework\TestCase
         $xml = $this->loadXml('./storage/xml/rests.xml');
         $rests = $parser->getItems($xml);
         $this->assertEquals(12, count($rests));
+    }
+
+    public function testPricesCount(): void
+    {
+        $parser = new ParsePrices();
+        $xml = $this->loadXml('./storage/xml/prices.xml');
+        $prices = $parser->getItems($xml);
+        $this->assertEquals(3, count($prices));
+    }
+
+    public function testTypePricesCount(): void
+    {
+        $parser = new ParsePrices();
+        $xml = $this->loadXml('./storage/xml/classifier.xml');
+        $type_prices = $parser->getTypePrices($xml);
+        $this->assertEquals(7, count($type_prices));
     }
 
     private function loadXml(string $xml): \SimpleXMLElement
