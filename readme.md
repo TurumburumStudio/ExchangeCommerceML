@@ -1,1 +1,1 @@
-## CommerceML parser
+## CommerceML Exchange
