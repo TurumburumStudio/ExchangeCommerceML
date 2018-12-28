@@ -3,7 +3,7 @@
 namespace App\Tests\Parser;
 
 use App\Loader\Loader;
-use App\Parser\{ParseProducts, ParseGroups, ParseWarehouses, ParseRests, ParsePrices};
+use App\Parser\{ParseGroups, ParseProducts, ParseOffers, ParseWarehouses, ParseRests, ParsePrices};
 
 class ParserCountTest extends \PHPUnit\Framework\TestCase 
 {
@@ -22,6 +22,15 @@ class ParserCountTest extends \PHPUnit\Framework\TestCase
         $products = $parser->getItems($xml);
         $this->assertEquals(11, count($products));
     }
+
+    public function testOffersCount(): void
+    {
+        $parser = new ParseOffers();
+        $xml = $this->loadXml('./storage/xml/offers.xml');
+        $offers = $parser->getItems($xml);
+        $this->assertEquals(12, count($offers));
+    }
+    
 
     public function testWarehousesCount(): void
     {

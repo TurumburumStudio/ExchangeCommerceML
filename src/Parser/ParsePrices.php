@@ -14,8 +14,6 @@ class ParsePrices extends Parser implements ParserInterface
                 'id' => $item['Ид'], 
                 'prices' => $this->getPrices($item['Цены']['Цена']) 
             ];
-
-            //$result[] = $item;
         }
 
         return $result;
