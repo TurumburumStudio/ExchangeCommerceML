@@ -12,7 +12,7 @@ class ParsePrices extends Parser implements ParserInterface
         foreach ($items['ПакетПредложений']['Предложения']['Предложение'] as $item) {
             $result[] = [
                 'id' => $item['Ид'], 
-                'prices' => $this->getPrices($item['Цены']['Цена']) 
+                'prices' => $this->getPrices($item['Цены']['Цена'])
             ];
         }
 
@@ -27,7 +27,7 @@ class ParsePrices extends Parser implements ParserInterface
         foreach ($items['Классификатор']['ТипыЦен']['ТипЦены'] as $item) {
             $result[] = [
                 'id' => $item['Ид'], 
-                'name' => $item['Наименование'], 
+                'name' => $item['Наименование'],
                 'inactive' => $item['ПометкаУдаления'], 
                 'currency' => $item['Валюта']
             ];
