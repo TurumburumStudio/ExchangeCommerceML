@@ -21,11 +21,19 @@ class ParseGroups extends Parser implements ParserInterface
 
     private function getGroups(array $items, string $parent = null): array
     {
-        foreach ($items as $item) {
-            $groups[] = [$item['Ид'], $item['Наименование'], $parent];
+        if (isset($items['Ид'])) {
+            $groups[] = [$items['Ид'], $items['Наименование'], $parent];
 
-            if (array_key_exists('Группы', $item)) {
-                $groups[] = $this->getGroups($item['Группы']['Группа'], $item['Ид']);
+            if (array_key_exists('Группы', $items)) {
+                $groups[] = $this->getGroups($items['Группы']['Группа'], $items['Ид']);
+            }
+        } else {
+            foreach ($items as $item) {
+                $groups[] = [$item['Ид'], $item['Наименование'], $parent];
+
+                if (array_key_exists('Группы', $item)) {
+                    $groups[] = $this->getGroups($item['Группы']['Группа'], $item['Ид']);
+                }
             }
         }
 
