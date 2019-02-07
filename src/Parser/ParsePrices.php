@@ -9,11 +9,18 @@ class ParsePrices extends Parser implements ParserInterface
         $items = $this->XmlToArray($xml);
         $result = [];
 
-        foreach ($items['ПакетПредложений']['Предложения']['Предложение'] as $item) {
+        if (isset($items['ПакетПредложений']['Предложения']['Предложение']['Ид'])) {
             $result[] = [
-                'id' => $item['Ид'], 
-                'prices' => $this->getPrices($item['Цены']['Цена'])
+                'id' => $items['ПакетПредложений']['Предложения']['Предложение']['Ид'],
+                'prices' => $this->getPrices($items['ПакетПредложений']['Предложения']['Предложение']['Цены']['Цена'])
             ];
+        } else {
+            foreach ($items['ПакетПредложений']['Предложения']['Предложение'] as $item) {
+                $result[] = [
+                    'id' => $item['Ид'],
+                    'prices' => $this->getPrices($item['Цены']['Цена'])
+                ];
+            }
         }
 
         return $result;
