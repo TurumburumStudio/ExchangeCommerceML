@@ -8,6 +8,15 @@ class ParseRests implements ParserInterface
     {
         $result = [];
 
+        if (
+            !array_key_exists('ПакетПредложений', $items) &&
+            !array_key_exists('Предложения', $items['ПакетПредложений']) &&
+            !array_key_exists('Предложение', $items['ПакетПредложений']['Предложения']) &&
+            !array_key_exists('Остатки', $items['ПакетПредложений']['Предложения']['Предложение'])
+        ) {
+            return $result;
+        }
+
         foreach ($items['ПакетПредложений']['Предложения']['Предложение'] as $item) {
             $result[] = [
                 'id' => $item['Ид'], 

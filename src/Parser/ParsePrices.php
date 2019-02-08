@@ -8,7 +8,12 @@ class ParsePrices implements ParserInterface
     {
         $result = [];
 
-        if (!array_key_exists('Цены', $items)) {
+        if (
+            !array_key_exists('ПакетПредложений', $items) &&
+            !array_key_exists('Предложения', $items['ПакетПредложений']) &&
+            !array_key_exists('Предложение', $items['ПакетПредложений']['Предложения']) &&
+            !array_key_exists('Цены', $items['ПакетПредложений']['Предложения']['Предложение'])
+        ) {
             return $result;
         }
 

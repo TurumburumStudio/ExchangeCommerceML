@@ -8,11 +8,22 @@ class Loader
 {
     private $types = [];
     private $data = [];
+    private $type = '';
 
     public function __construct(string $xml)
     {
         if (!is_file($xml)) {
             throw new \Exception("File error");
+        }
+
+        if (stristr($xml, 'offers')) {
+            $type = 'offers';
+        } else if (stristr($xml, 'prices')) {
+            $type = 'prices';
+        } else if (stristr($xml, 'rests')) {
+            $type = 'rests';
+        } else {
+            $type = 'import';
         }
 
         $file = file_get_contents($xml);
@@ -23,6 +34,7 @@ class Loader
 
         $this->data = $this->XmlToArray($xml);
         $this->types = $types;
+        $this->type = $type;
     }
 
     public function getArray(): array
@@ -30,7 +42,7 @@ class Loader
         if (in_array('Классификатор', $this->types) || in_array('Каталог', $this->types)) {
             $loader = new LoadClassifier($this->data);
         } elseif (in_array('ПакетПредложений', $this->types)) {
-            $loader = new LoadOffers($this->data);
+            $loader = new LoadOffers($this->data, $this->type);
         }
 
         return $loader->getData();
