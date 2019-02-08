@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Loader;
+namespace ExchangeCommerceML\Loader;
 
 interface LoaderInterface
 {

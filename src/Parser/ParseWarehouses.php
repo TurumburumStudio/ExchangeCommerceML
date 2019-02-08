@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Parser;
+namespace ExchangeCommerceML\Parser;
 
 class ParseWarehouses extends Parser implements ParserInterface
 {

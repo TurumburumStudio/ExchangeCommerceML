@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Parser;
+namespace ExchangeCommerceML\Parser;
 
-use App\Services\ArrayHelper;
+use ExchangeCommerceML\Services\ArrayHelper;
 
 class ParseGroups extends Parser implements ParserInterface
 {

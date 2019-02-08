@@ -2,8 +2,8 @@
 
 require_once('./vendor/autoload.php');
 
-use App\Loader\Loader;
-use App\Parser\{ParseGroups, ParseProducts, ParseWarehouses, ParseRests, ParsePrices, ParseOffers};
+use ExchangeCommerceML\Loader\Loader;
+use ExchangeCommerceML\Parser\{ParseGroups, ParseProducts, ParseWarehouses, ParseRests, ParsePrices, ParseOffers};
 
 $classifier_url = './storage/xml/import___2acfecc1-daa4-4e38-af6a-6734172b63cb.xml';
 $import_url = './storage/xml/import___b5bef49f-0995-4899-841f-cc403c11e354.xml';
