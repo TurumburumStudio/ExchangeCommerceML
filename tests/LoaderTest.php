@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests;
+namespace ExchangeCommerceML\Tests;
 
 class LoaderTest extends \PHPUnit\Framework\TestCase 
 {

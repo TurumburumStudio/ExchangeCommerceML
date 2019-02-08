@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Tests\Parser;
+namespace ExchangeCommerceML\Tests\Parser;
 
-use App\Loader\Loader;
-use App\Parser\{ParseGroups, ParseProducts, ParseOffers, ParseWarehouses, ParseRests, ParsePrices};
+use ExchangeCommerceML\Loader\Loader;
+use ExchangeCommerceML\Parser\{ParseGroups, ParseProducts, ParseOffers, ParseWarehouses, ParseRests, ParsePrices};
 
 class ParserCountTest extends \PHPUnit\Framework\TestCase 
 {
