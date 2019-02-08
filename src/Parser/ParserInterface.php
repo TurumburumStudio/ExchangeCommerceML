@@ -4,5 +4,5 @@ namespace ExchangeCommerceML\Parser;
 
 interface ParserInterface
 {
-    function getItems(\SimpleXMLElement $xml): array;
+    function getItems(array $items): array;
 }

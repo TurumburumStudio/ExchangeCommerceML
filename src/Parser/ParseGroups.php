@@ -4,13 +4,15 @@ namespace ExchangeCommerceML\Parser;
 
 use ExchangeCommerceML\Services\ArrayHelper;
 
-class ParseGroups extends Parser implements ParserInterface
+class ParseGroups implements ParserInterface
 {
     use ArrayHelper;
 
-    public function getItems(\SimpleXMLElement $xml): array
+    public function getItems(array $items): array
     {
-        $items = $this->XmlToArray($xml);
+        if (!array_key_exists('Группы', $items)) {
+            return [];
+        }
 
         $groups = $this->getGroups($items['Классификатор']['Группы']['Группа']);
 

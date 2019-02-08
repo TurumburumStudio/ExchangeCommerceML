@@ -2,12 +2,15 @@
 
 namespace ExchangeCommerceML\Parser;
 
-class ParsePrices extends Parser implements ParserInterface
+class ParsePrices implements ParserInterface
 {
-    public function getItems(\SimpleXMLElement $xml): array
+    public function getItems(array $items): array
     {
-        $items = $this->XmlToArray($xml);
         $result = [];
+
+        if (!array_key_exists('Цены', $items)) {
+            return $result;
+        }
 
         if (isset($items['ПакетПредложений']['Предложения']['Предложение']['Ид'])) {
             $result[] = [
@@ -26,10 +29,14 @@ class ParsePrices extends Parser implements ParserInterface
         return $result;
     }
 
-    public function getTypePrices(\SimpleXMLElement $xml): array
+    // TODO: create new class
+    public function getTypePrices(array $items): array
     {
-        $items = $this->XmlToArray($xml);
         $result = [];
+
+        if (!array_key_exists('ТипыЦен', $items)) {
+            return $result;
+        }
 
         foreach ($items['Классификатор']['ТипыЦен']['ТипЦены'] as $item) {
             $result[] = [

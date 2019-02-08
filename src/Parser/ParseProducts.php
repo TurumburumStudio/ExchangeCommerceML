@@ -2,12 +2,15 @@
 
 namespace ExchangeCommerceML\Parser;
 
-class ParseProducts extends Parser implements ParserInterface
+class ParseProducts implements ParserInterface
 {
-    public function getItems(\SimpleXMLElement $xml): array
+    public function getItems(array $items): array
     {
-        $items = $this->XmlToArray($xml);
         $result = [];
+
+        if (!array_key_exists('Товары', $items)) {
+            return $result;
+        }
 
         foreach ($items['Каталог']['Товары']['Товар'] as $item) {
             $result[] = [

@@ -2,25 +2,45 @@
 
 namespace ExchangeCommerceML\Loader;
 
-use Symfony\Component\Finder\Finder;
+use ExchangeCommerceML\Services;
 
 class Loader
 {
-    public function __construct()
-    {
-    }
+    private $types = [];
+    private $data = [];
 
-    public function extractArray(string $path)
+    public function __construct(string $xml)
     {
-
-    }
-
-    public function load(string $xml)
-    {
-        if (is_file($xml)) {
-            return simplexml_load_string(file_get_contents($xml));
+        if (!is_file($xml)) {
+            throw new \Exception("File error");
         }
 
-        return simplexml_load_string($xml);
+        $file = file_get_contents($xml);
+
+        $xml = simplexml_load_string($file);
+
+        $types = Services\CheckType::getListType($this->XmlToArray($xml));
+
+        $this->data = $this->XmlToArray($xml);
+        $this->types = $types;
+    }
+
+    public function getArray(): array
+    {
+        if (in_array('Классификатор', $this->types) || in_array('Каталог', $this->types)) {
+            $loader = new LoadClassifier($this->data);
+        } elseif (in_array('ПакетПредложений', $this->types)) {
+            $loader = new LoadOffers($this->data);
+        }
+
+        return $loader->getData();
+    }
+
+    private function XmlToArray(\SimpleXMLElement $xml): array
+    {
+        $json = json_encode($xml);
+        $array = json_decode($json, TRUE);
+
+        return $array;
     }
 }
