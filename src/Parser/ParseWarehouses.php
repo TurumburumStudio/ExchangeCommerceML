@@ -8,7 +8,7 @@ class ParseWarehouses implements ParserInterface
     {
         $result = [];
 
-        if (!array_key_exists('Склады', $items)) {
+        if (!array_key_exists('Склады', $items['Классификатор'])) {
             return $result;
         }
 

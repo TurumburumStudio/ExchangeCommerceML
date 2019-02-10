@@ -48,6 +48,22 @@ class Loader
         return $loader->getData();
     }
 
+    public function saveToJson()
+    {
+        $dir = './storage/json/';
+        $time = time();
+        $path = $dir.$time."/";
+
+        mkdir($path);
+
+        $data = $this->getArray();
+
+        foreach ($data as $key => $value) {
+            $filename = $path.$key.".json";
+            file_put_contents($filename, json_encode($value), FILE_APPEND | LOCK_EX);
+        }
+    }
+
     private function XmlToArray(\SimpleXMLElement $xml): array
     {
         $json = json_encode($xml);

@@ -10,7 +10,11 @@ class ParseGroups implements ParserInterface
 
     public function getItems(array $items): array
     {
-        if (!array_key_exists('Группы', $items)) {
+
+        if (
+            !array_key_exists('Классификатор', $items) &&
+            !array_key_exists('Группы', $items['Классификатор'])
+        ) {
             return [];
         }
 

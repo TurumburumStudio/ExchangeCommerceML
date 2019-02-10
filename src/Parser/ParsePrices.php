@@ -39,7 +39,7 @@ class ParsePrices implements ParserInterface
     {
         $result = [];
 
-        if (!array_key_exists('ТипыЦен', $items)) {
+        if (!array_key_exists('ТипыЦен', $items['Классификатор'])) {
             return $result;
         }
 

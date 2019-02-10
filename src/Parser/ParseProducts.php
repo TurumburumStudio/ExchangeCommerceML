@@ -8,19 +8,19 @@ class ParseProducts implements ParserInterface
     {
         $result = [];
 
-        if (!array_key_exists('Товары', $items)) {
+        if (!array_key_exists('Товары', $items['Каталог'])) {
             return $result;
         }
 
         foreach ($items['Каталог']['Товары']['Товар'] as $item) {
             $result[] = [
                 'id' => $item['Ид'], 
-                'article' => $item['Артикул'], 
-                'desc' => $item['Описание'],
+                'article' => empty($item['Артикул']) ? '' : $item['Артикул'],
+                'desc' => empty($item['Описание']) ? '' : $item['Описание'],
                 'groups' => $this->getGroups($item['Группы']),
-                'country' => $item['Страна'],
-                'weight' => $item['Вес'],
-                'inactive' => $item['ПометкаУдаления']
+                'country' => empty($item['Страна']) ? '' : $item['Страна'],
+                'weight' => empty($item['Вес']) ? '' : $item['Вес'],
+                'inactive' => empty($item['ПометкаУдаления']) ? '' : $item['ПометкаУдаления'],
             ];
         }
 

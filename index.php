@@ -16,8 +16,10 @@ $loadOffers = new Loader($offers_url);
 $loadPrices = new Loader($prices_url);
 $loadRests = new Loader($rests_url);
 
-$classifier = $loadClassifier->getArray();
-$products = $loadProducts->getArray();
-$offers = $loadOffers->getArray();
-$prices = $loadPrices->getArray();
-$rests = $loadRests->getArray();
+//$classifier = $loadClassifier->getArray();
+//$products = $loadProducts->getArray();
+//$offers = $loadOffers->getArray();
+//$prices = $loadPrices->getArray();
+//$rests = $loadRests->getArray();
+
+$loadRests->saveToJson();

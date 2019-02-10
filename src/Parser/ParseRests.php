@@ -17,11 +17,18 @@ class ParseRests implements ParserInterface
             return $result;
         }
 
-        foreach ($items['ПакетПредложений']['Предложения']['Предложение'] as $item) {
+        if (isset($items['ПакетПредложений']['Предложения']['Предложение']['Ид'])) {
             $result[] = [
-                'id' => $item['Ид'], 
-                'warehouses' => $this->getRests($item['Остатки']['Остаток'])
+                'id' => $items['ПакетПредложений']['Предложения']['Предложение']['Ид'],
+                'warehouses' => $this->getRests($items['ПакетПредложений']['Предложения']['Предложение']['Остатки']['Остаток'])
             ];
+        } else {
+            foreach ($items['ПакетПредложений']['Предложения']['Предложение'] as $item) {
+                $result[] = [
+                    'id' => $item['Ид'],
+                    'warehouses' => $this->getRests($item['Остатки']['Остаток'])
+                ];
+            }
         }
 
         return $result;
