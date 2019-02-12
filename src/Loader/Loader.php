@@ -50,6 +50,16 @@ class Loader
         return $loader->getData();
     }
 
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    public function getTypes()
+    {
+        return $this->types;
+    }
+
     private function XmlToArray(\SimpleXMLElement $xml): array
     {
         $json = json_encode($xml);
