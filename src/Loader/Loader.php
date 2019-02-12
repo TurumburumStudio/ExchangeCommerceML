@@ -6,7 +6,6 @@ use ExchangeCommerceML\Services;
 
 class Loader
 {
-    private $dir = './storage/json/';
     private $types = [];
     private $data = [];
     private $type = '';
@@ -40,28 +39,15 @@ class Loader
 
     public function getArray(): array
     {
-        if (in_array('Классификатор', $this->types) || in_array('Каталог', $this->types)) {
+        if (in_array('Классификатор', $this->types)) {
             $loader = new LoadClassifier($this->data);
+        } else if (in_array('Каталог', $this->types)) {
+            $loader = new LoadCatalog($this->data);
         } elseif (in_array('ПакетПредложений', $this->types)) {
             $loader = new LoadOffers($this->data, $this->type);
         }
 
         return $loader->getData();
-    }
-
-    public function saveToJson()
-    {
-        $time = time();
-        $path = $this->dir.$time."/";
-
-        mkdir($path);
-
-        $data = $this->getArray();
-
-        foreach ($data as $key => $value) {
-            $filename = $path.$key.".json";
-            file_put_contents($filename, json_encode($value), FILE_APPEND | LOCK_EX);
-        }
     }
 
     private function XmlToArray(\SimpleXMLElement $xml): array

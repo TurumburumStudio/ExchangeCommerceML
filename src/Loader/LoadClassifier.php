@@ -2,7 +2,7 @@
 
 namespace ExchangeCommerceML\Loader;
 
-use ExchangeCommerceML\Parser\{ParseGroups, ParseProducts, ParseWarehouses, ParsePrices};
+use ExchangeCommerceML\Parser\{ParseGroups, ParseWarehouses, ParsePrices};
 
 class LoadClassifier implements LoadInterface
 {
@@ -11,7 +11,6 @@ class LoadClassifier implements LoadInterface
         'Группы',
         'ТипыЦен',
         'Склады',
-        'Товары',
         //'Свойства',
         //'ЕдиницыИзмерения',
     ];
@@ -37,12 +36,6 @@ class LoadClassifier implements LoadInterface
                     $priceParser = new ParsePrices();
                     if (!empty($priceParser->getTypePrices($this->data))) {
                         $items['price_type'] = $priceParser->getTypePrices($this->data);
-                    }
-                    break;
-                case 'Товары';
-                    $productParser = new ParseProducts();
-                    if (!empty($productParser->getItems($this->data))) {
-                        $items['products'] = $productParser->getItems($this->data);
                     }
                     break;
                 case 'Склады';

@@ -8,11 +8,7 @@ class ParseOffers implements ParserInterface
     {
         $result = [];
 
-        if (
-            !array_key_exists('ПакетПредложений', $items) &&
-            !array_key_exists('Предложения', $items['ПакетПредложений']) &&
-            !array_key_exists('Предложение', $items['ПакетПредложений']['Предложения'])
-        ) {
+        if (!(stripos(json_encode($items, JSON_UNESCAPED_UNICODE), 'Предложение') > 0)) {
             return $result;
         }
 

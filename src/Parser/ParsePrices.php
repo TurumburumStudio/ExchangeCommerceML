@@ -8,12 +8,8 @@ class ParsePrices implements ParserInterface
     {
         $result = [];
 
-        if (
-            !array_key_exists('ПакетПредложений', $items) &&
-            !array_key_exists('Предложения', $items['ПакетПредложений']) &&
-            !array_key_exists('Предложение', $items['ПакетПредложений']['Предложения']) &&
-            !array_key_exists('Цены', $items['ПакетПредложений']['Предложения']['Предложение'])
-        ) {
+
+        if (!(stripos(json_encode($items, JSON_UNESCAPED_UNICODE), 'Цены') > 0)) {
             return $result;
         }
 
@@ -39,7 +35,7 @@ class ParsePrices implements ParserInterface
     {
         $result = [];
 
-        if (!array_key_exists('ТипыЦен', $items['Классификатор'])) {
+        if (!(stripos(json_encode($items, JSON_UNESCAPED_UNICODE), 'ТипыЦен') > 0)) {
             return $result;
         }
 

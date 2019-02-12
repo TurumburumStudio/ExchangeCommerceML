@@ -8,7 +8,7 @@ class ParseWarehouses implements ParserInterface
     {
         $result = [];
 
-        if (!array_key_exists('Склады', $items['Классификатор'])) {
+        if (!(stripos(json_encode($items, JSON_UNESCAPED_UNICODE), 'Склады') > 0)) {
             return $result;
         }
 
