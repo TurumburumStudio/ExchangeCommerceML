@@ -6,6 +6,7 @@ use ExchangeCommerceML\Services;
 
 class Loader
 {
+    private $dir = './storage/json/';
     private $types = [];
     private $data = [];
     private $type = '';
@@ -50,9 +51,8 @@ class Loader
 
     public function saveToJson()
     {
-        $dir = './storage/json/';
         $time = time();
-        $path = $dir.$time."/";
+        $path = $this->dir.$time."/";
 
         mkdir($path);
 
