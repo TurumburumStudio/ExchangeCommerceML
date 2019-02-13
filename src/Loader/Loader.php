@@ -10,29 +10,33 @@ class Loader
     private $data = [];
     private $type = '';
 
-    public function __construct(string $xml)
+    public function __construct(string $xmlPath)
     {
-        if (!is_file($xml)) {
+        if (!is_file($xmlPath)) {
             throw new \Exception("File error");
         }
 
-        if (stristr($xml, 'offers')) {
+        $file = file_get_contents($xmlPath);
+        $xmlObj = simplexml_load_string($file);
+        $types = Services\CheckType::getListType($this->XmlToArray($xmlObj));
+
+        $type = '';
+
+        if (stristr($xmlPath, 'offers')) {
             $type = 'offers';
-        } else if (stristr($xml, 'prices')) {
+        } else if (stristr($xmlPath, 'prices')) {
             $type = 'prices';
-        } else if (stristr($xml, 'rests')) {
+        } else if (stristr($xmlPath, 'rests')) {
             $type = 'rests';
         } else {
-            $type = 'import';
+            if (in_array('Классификатор', $types)) {
+                $type = 'classifier';
+            } else if (in_array('Каталог', $types)) {
+                $type = 'products';
+            }
         }
 
-        $file = file_get_contents($xml);
-
-        $xml = simplexml_load_string($file);
-
-        $types = Services\CheckType::getListType($this->XmlToArray($xml));
-
-        $this->data = $this->XmlToArray($xml);
+        $this->data = $this->XmlToArray($xmlObj);
         $this->types = $types;
         $this->type = $type;
     }
@@ -53,11 +57,6 @@ class Loader
     public function getType()
     {
         return $this->type;
-    }
-
-    public function getTypes()
-    {
-        return $this->types;
     }
 
     private function XmlToArray(\SimpleXMLElement $xml): array
