@@ -6,7 +6,6 @@ use ExchangeCommerceML\Services;
 
 class Loader
 {
-    private $types = [];
     private $data = [];
     private $type = '';
 
@@ -19,8 +18,6 @@ class Loader
         $file = file_get_contents($xmlPath);
         $xmlObj = simplexml_load_string($file);
         $types = Services\CheckType::getListType($this->XmlToArray($xmlObj));
-
-        $type = '';
 
         if (stristr($xmlPath, 'offers')) {
             $type = 'offers';
@@ -37,17 +34,16 @@ class Loader
         }
 
         $this->data = $this->XmlToArray($xmlObj);
-        $this->types = $types;
         $this->type = $type;
     }
 
     public function getArray(): array
     {
-        if (in_array('Классификатор', $this->types)) {
+        if ($this->type == 'classifier') {
             $loader = new LoadClassifier($this->data);
-        } else if (in_array('Каталог', $this->types)) {
+        } else if ($this->type == 'products') {
             $loader = new LoadCatalog($this->data);
-        } elseif (in_array('ПакетПредложений', $this->types)) {
+        } else {
             $loader = new LoadOffers($this->data, $this->type);
         }
 
