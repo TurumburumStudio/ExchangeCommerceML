@@ -10,8 +10,6 @@ class ParseGroups implements ParserInterface
 
     public function getItems(array $items): array
     {
-        return [];
-
         if (!(stripos(json_encode($items, JSON_UNESCAPED_UNICODE), 'Группы') > 0)) {
             return [];
         }
